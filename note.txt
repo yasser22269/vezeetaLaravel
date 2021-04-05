@@ -1,0 +1,4 @@
+login
+
+  return $query->inRandomOrder()->take(4);
+
