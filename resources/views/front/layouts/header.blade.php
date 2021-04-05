@@ -17,7 +17,7 @@
   <!-- Slick Slider  CSS -->
   <link rel="stylesheet" href="{{asset('/front/')}}/plugins/slick-carousel/slick/slick.css">
   <link rel="stylesheet" href="{{asset('/front/')}}/plugins/slick-carousel/slick/slick-theme.css">
-
+    @yield('style')
   <!-- Main Stylesheet -->
   <link rel="stylesheet" href="{{asset('/front/')}}/css/style.css">
 
@@ -50,7 +50,8 @@
 	<nav class="navbar navbar-expand-lg navigation" id="navbar">
 		<div class="container">
 		 	 <a class="navbar-brand" href="{{route('home')}}">
-			  	<img src="{{asset('/front/')}}/images/logo.png" alt="" class="img-fluid">
+			  	<img src="{{asset('/front/')}}/images/logo.jpeg" alt="" style="    background-size: cover;
+                  width: 100px;" class="img-fluid">
 			  </a>
 
 		  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -75,8 +76,36 @@
 						<li><a class="dropdown-item" href="appoinment.html">Appoinment</a></li>
 					</ul>
 			  	</li> --}}
+                  @guest
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a>
+                    </li>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('register') }}">تسجيل حساب جديد</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->name }}
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                            onclick="event.preventDefault();
+                                            document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endguest
+
                   <li class="nav-item"><a class="nav-link" href="{{route('Contacts')}}">تواصل معنا</a></li>
-                  <li class="nav-item"><a class="nav-link" href="{{route('Contacts')}}">العروض المتاحة</a></li>
                   <li class="nav-item"><a class="nav-link" href="{{ route('categoriesHome') }}">الاقسام</a></li>
                   <li class="nav-item"><a class="nav-link" href="{{ route('about_me') }}">من نحن</a></li>
                   <li class="nav-item active">

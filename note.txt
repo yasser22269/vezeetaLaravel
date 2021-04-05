@@ -1,4 +1,11 @@
 login
+reset
+comemnts
+products
 
-  return $query->inRandomOrder()->take(4);
+
+Admin
+الحجوزات
+
+return $query->inRandomOrder()->take(4);
 

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Site;
 
 use App\Models\Comment;
+use App\Models\Feedback;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\front\CommentRequest;
+use App\Http\Requests\front\FeedbackRequest;
 use Illuminate\Support\Facades\DB;
 
 class CommentController extends Controller
@@ -55,12 +57,21 @@ class CommentController extends Controller
         }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Comment  $comment
-     * @return \Illuminate\Http\Response
-     */
+    public function Feedback(FeedbackRequest $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $Feedback =  Feedback::create($request->except('_token'));
+
+            DB::commit();
+            return redirect()->Back()->with(['success' => 'تم ألاضافة بنجاح']);
+        } catch (\Exception $ex) {
+            DB::rollback();
+            return  redirect()->Back()->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+        }
+    }
     public function show(Comment $comment)
     {
         //

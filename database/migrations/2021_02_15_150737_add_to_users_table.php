@@ -14,10 +14,7 @@ class AddToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('avatar')->nullable();
-            $table->string('provider', 20)->nullable();
-            $table->string('provider_id')->nullable();
-            $table->string('access_token')->nullable();
+            $table->string('phone')->nullable();
         });
     }
 

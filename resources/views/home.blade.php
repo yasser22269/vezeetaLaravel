@@ -270,6 +270,14 @@
 		</div>
 	</div>
 </section>
+{{-- <section class="section appoinment">
+		<div class="row align-items-center">
+			<div class="col-lg-12">
+                <img src="{{asset('/front/')}}/images/photo1.jpeg" alt="">
+            </div>
+        </div>
+</section> --}}
+
 <section class="section testimonial-2 gray-bg">
 	<div class="container">
 		<div class="row justify-content-center">

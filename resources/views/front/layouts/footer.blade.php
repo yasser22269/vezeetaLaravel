@@ -88,6 +88,7 @@
 
     <script src="{{asset('/front/')}}/js/script.js"></script>
     <script src="{{asset('/front/')}}/js/contact.js"></script>
+    @yield('js')
 
   </body>
 </html>

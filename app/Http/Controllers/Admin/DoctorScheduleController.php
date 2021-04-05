@@ -85,7 +85,6 @@ class DoctorScheduleController extends Controller
 
         $Doctors = Doctor::get();
 
-
         return view('Admin.doctorSchedules.edit', compact('DoctorSchedule', "Doctors"));
     }
 

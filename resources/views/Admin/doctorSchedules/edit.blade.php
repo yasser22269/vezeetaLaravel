@@ -98,7 +98,6 @@
                             <span class="text-danger">{{$message }}</span>
                             @enderror
                         </div>
-            {{ $DoctorSchedule->bookAvailable == 1 ? 'ليس محجوزا': "(محجوز)"}}
 
 
 
@@ -113,7 +112,11 @@
 
           </div>
          </div>
-
+         <h2> {{ $DoctorSchedule->bookAvailable == 1 ? 'ليس محجوزا': "(محجوز)"}}</h2>
+         @if ($DoctorSchedule->patient->count() ==1)
+         <h2>Name: {{ $DoctorSchedule->patient->first()->name }}</h2>
+         <h2>Email: {{ $DoctorSchedule->patient->first()->email }}</h2>
+          @endif
 
          @endsection
 

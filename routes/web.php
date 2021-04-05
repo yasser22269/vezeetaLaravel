@@ -21,10 +21,10 @@ Route::group([
 ], function () {
 
 
-
         Auth::routes();
 
         // Route::get('/', 'Site\HomeController@index');
+        // Route::get('/home', 'HomeController@index')->name('home');
 
         Route::get('/', 'HomeController@index')->name('home');
         Route::get('/about_me', 'HomeController@about_me')->name('about_me');
@@ -62,7 +62,7 @@ Route::group([
 
         // ------------------------------Start CommentController-----------------------
 
-        Route::post('comment', 'CommentController@store')->name('storeComment');
+        Route::post('Feedback', 'CommentController@Feedback')->name('Feedback');
         // ------------------------------End CommentController--------------------
 
 
@@ -97,6 +97,8 @@ Route::group([
 
 
 });//
+
+
 
 
 

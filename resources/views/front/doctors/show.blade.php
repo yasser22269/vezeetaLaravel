@@ -1,6 +1,8 @@
 @extends('layouts.app')
-@section('title','doctors')
+@section('title','doctor')
+@section('style')
 
+@endsection
 @section('content')
 <section class="page-title bg-1">
     <div class="overlay"></div>
@@ -27,8 +29,34 @@
 
 	<div class="sidebar-widget schedule-widget mb-3">
 		<h5 class="mb-4">الكشف من هنا</h5>
+        <div class="sidebar-widget tags mb-3">
+            <h5 class="mb-4">اليوم</h5>
+            @if ($DoctorScheduleDAy->count() > 0)
 
-		<ul class="list-unstyled">
+            <div class="dates" style="overflow-y: scroll;width: 100%;height: 147px;">
+            @foreach ($DoctorScheduleDAy as $Day)
+            <a href="#">{{ date('h:i a', strtotime($Day->startTime))  }}</a>
+            @endforeach
+          </div>
+             @else
+             تم حجز جميع مواعيد
+            @endif
+        </div>
+
+        <div class="sidebar-widget tags mb-3">
+            <h5 class="mb-4">غدا</h5>
+            @if ($DoctorScheduleTomorrow->count() > 0)
+            <div class="dates" style="overflow-y: scroll;width: 100%;height: 147px;">
+            @foreach ($DoctorScheduleTomorrow as $Tomorrow)
+            <a href="#">{{ date('h:i a', strtotime($Tomorrow->startTime))  }}</a>
+            @endforeach
+             </div>
+        @else
+        تم حجز جميع مواعيد
+        @endif
+
+        </div>
+		{{-- <ul class="list-unstyled">
 		  <li class="d-flex justify-content-between align-items-center">
 		    <a href="#">Monday - Friday</a>
 		    <span>9:00 - 17:00</span>
@@ -41,7 +69,7 @@
 		    <a href="#">Sunday</a>
 		    <span>Closed</span>
 		  </li>
-		</ul>
+		</ul> --}}
 
 	</div>
 	<div class="sidebar-widget latest-post mb-3">
@@ -129,7 +157,7 @@
 
 	<div class="col-lg-12">
 		<div class="comment-area mt-4 mb-5">
-			<h4 class="mb-4">{{ $doctor->comments->count() }} Comments </h4>
+			<h4 class="mb-4">({{ $doctor->comments->count() }} )تعليق </h4>
 			<ul class="comment-tree list-unstyled">
 
                 @foreach ($doctor->comments as $comment)
@@ -157,25 +185,37 @@
 
 
 	<div class="col-lg-12">
-		<form class="comment-form my-5" id="comment-form">
-			<h4 class="mb-4">Write a comment</h4>
+		<form class="comment-form my-5" id="comment-form" action="{{ route('Feedback') }}" method="POST">
+            @csrf
+            <input type="hidden" name="doctor_id" value="{{ $doctor->id }}">
+			<h4 class="mb-4">اكتب تعليقا</h4>
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<input class="form-control" type="text" name="name" id="name" placeholder="Name:">
+						<input class="form-control" id="name" placeholder="Name:"name='name' type="text">
+                        @error('name')
+                        <span class="text-danger"> {{$message}}</span>
+                        @enderror
 					</div>
 				</div>
 				<div class="col-md-6">
 					<div class="form-group">
-						<input class="form-control" type="text" name="mail" id="mail" placeholder="Email:">
+						<input class="form-control" id="mail" placeholder="Email:" name='email' type="email">
+                        @error('email')
+                        <sppan class="text-danger"> {{$message}}</span>
+                        @enderror
+
 					</div>
 				</div>
 			</div>
 
 
 			<textarea class="form-control mb-4" name="comment" id="comment" cols="30" rows="5" placeholder="Comment"></textarea>
+            @error('comment')
+            <span class="text-danger"> {{$message}}</span>
+            @enderror
 
-			<input class="btn btn-main-2 btn-round-full" type="submit" name="submit-contact" id="submit_contact" value="Submit Message">
+			<input class="btn btn-main-2 btn-round-full" type="submit"  id="submit_contact" value="Submit Message">
 		</form>
 	</div>
 </div>
@@ -183,4 +223,8 @@
         </div>
     </div>
 </section>
+@endsection
+@section('js')
+<script>
+</script>
 @endsection

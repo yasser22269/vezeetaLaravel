@@ -6,10 +6,11 @@ use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Doctor;
+use App\Models\DoctorSchedule;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Carbon\Carbon;
 class DoctorController extends Controller
 {
 
@@ -31,11 +32,18 @@ class DoctorController extends Controller
     {
         $doctor =Doctor::Active()->where('slug',$slug)->first();
 
+       $DoctorScheduleDAy =  DoctorSchedule::NotBookAvailable()->where('doctor_id', $doctor->id)->where('scheduleDate','=', Carbon::now()->format('Y-m-d'))->get();
+       $DoctorScheduleDAy = $DoctorScheduleDAy->sortBy('scheduleDate');
+
+       $DoctorScheduleTomorrow =  DoctorSchedule::NotBookAvailable()->where('doctor_id', $doctor->id)->where('scheduleDate','=', Carbon::now()->addDay()->format('Y-m-d'))->get();
+       $DoctorScheduleTomorrow = $DoctorScheduleTomorrow->sortBy('scheduleDate');
+
+
         $doctor->viewed++;
         $doctor->save();
-
-       // return $doctor->comments;
-        return view('front.doctors.show',compact("doctor"));
+     //   return Carbon::now()->format('Y-m-d');
+       // return $DoctorScheduleDAy;
+        return view('front.doctors.show',compact("doctor",'DoctorScheduleDAy','DoctorScheduleTomorrow'));
     }
 
     public function appoinment(Request $request)

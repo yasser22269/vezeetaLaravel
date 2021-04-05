@@ -19,6 +19,11 @@ class DoctorSchedule extends Model
     public function scopeBookAvailable($query){
         return $query->where('BookAvailable',0) ; //محجوز
     }
+
+    public function scopeNotBookAvailable($query){
+        return $query->where('BookAvailable',1) ; //غير محجوز
+    }
+
     public function doctors()
     {
         return $this->belongsTo(Doctor::class,'doctor_id');
