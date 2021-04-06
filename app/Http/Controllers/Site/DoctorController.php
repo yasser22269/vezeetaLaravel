@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Site;
 
 use App\Models\Product;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\front\ApprointmentRequest;
+use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\Doctor;
 use App\Models\DoctorSchedule;
@@ -55,7 +57,30 @@ class DoctorController extends Controller
     }
 
 
+    public function appoinmentshow(Request $request,$id)
+    {
 
+       $DoctorSchedule= DoctorSchedule::NotBookAvailable()->findOrfail($id);
+        if(!$DoctorSchedule)
+             return redirect()->back()->with(['error' => 'لا يوجد صفحه بهذا الاسم']);
 
+        return view('front.doctors.appointment', compact('id','DoctorSchedule'));
+    }
+
+    public function appoinmentupdate(ApprointmentRequest $request,$id)
+    {
+
+       $DoctorSchedule = DoctorSchedule::NotBookAvailable()->findOrfail($id);
+        if(!$DoctorSchedule)
+          return redirect()->back()->with(['error' => 'لا يوجد حجز بهذا الاسم']);
+
+          $DoctorSchedule->bookAvailable =0;  //تم الحجز
+          $DoctorSchedule->save();
+
+          Appointment::create($request->all());
+
+          return redirect()->route('home')->with(['success' => 'تم الحجز بنجاح']);
+
+    }
 
 }

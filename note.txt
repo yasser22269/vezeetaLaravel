@@ -1,6 +1,5 @@
 login
 reset
-comemnts
 products
 
 

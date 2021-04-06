@@ -29,9 +29,14 @@ class DoctorSchedule extends Model
         return $this->belongsTo(Doctor::class,'doctor_id');
     }
 
-    public function patient()
+    // public function patient()
+    // {
+    //     return $this->belongsToMany(User::class,"appointments","doctor_id","user_id");
+    // }
+
+    public function appointments()
     {
-        return $this->belongsToMany(User::class,"appointments","doctor_id","user_id");
+        return $this->hasMany(Appointment::class);
     }
 
 }

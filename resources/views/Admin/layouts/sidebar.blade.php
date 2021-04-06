@@ -18,6 +18,8 @@
           </li>
           <li class="nav-item  {{ Request::is('Admin/DoctorSchedule*') ? 'active' : '' }}"><a href="{{ route('DoctorSchedule.index') }}"><i class="la la-check-square"></i><span class="menu-title" >Schedule(مواعيد الاطباء)</span><span class="badge badge badge-info float-right"> {{ App\Models\DoctorSchedule::count() }} </span></a>
           </li>
+          <li class="nav-item  {{ Request::is('Admin/reservation*') ? 'active' : '' }}"><a href="{{ route('reservation.index') }}"><i class="la la-check-square"></i><span class="menu-title" >reservation(حجوزات)</span><span class="badge badge badge-info float-right"> {{ App\Models\Appointment::count() }} </span></a>
+          </li>
 
           <li class=" navigation-header">
             <span data-i18n="nav.category.pages">categories</span><i class="la la-ellipsis-h ft-minus" data-toggle="tooltip" data-placement="right" data-original-title="Pages"></i>

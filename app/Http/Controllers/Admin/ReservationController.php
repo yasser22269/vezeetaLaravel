@@ -6,10 +6,11 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorScheduleRequest;
 use App\Http\Requests\UpdateDoctorScheduleRequest;
+use App\Models\Appointment;
 use App\Models\Doctor;
 use Illuminate\Support\Facades\DB;
 
-class DoctorScheduleController extends Controller
+class ReservationController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +20,8 @@ class DoctorScheduleController extends Controller
     public function index()
     {
         //translatedIn(app() -> getLocale())->
-        $DoctorSchedules = DoctorSchedule::orderBy('id', 'desc')->paginate(PAGINATION_COUNT);
-        return view('Admin.doctorSchedules.index', compact('DoctorSchedules'));
+        $reservations = Appointment::paginate(PAGINATION_COUNT);
+        return view('Admin.reservations.index', compact('reservations'));
     }
 
     /**
@@ -43,7 +44,7 @@ class DoctorScheduleController extends Controller
      */
     public function store(DoctorScheduleRequest $request)
     {
-       try {
+     //   try {
         //    return $request;
             DB::beginTransaction();
             if (isset($request->bookAvailable) && $request->bookAvailable == 1){
@@ -67,10 +68,10 @@ class DoctorScheduleController extends Controller
 
             DB::commit();
             return redirect()->route('DoctorSchedule.index')->with(['success' => 'تم ألاضافة بنجاح']);
-       } catch (\Exception $ex) {
-           DB::rollback();
-           return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-       }
+     //   } catch (\Exception $ex) {
+      //      DB::rollback();
+       //     return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+      //  }
     }
 
     /**
@@ -97,7 +98,7 @@ class DoctorScheduleController extends Controller
      */
     public function update(UpdateDoctorScheduleRequest $request, $id)
     {
-       try {
+      //  try {
 
             DB::beginTransaction();
             $DoctorSchedule = DoctorSchedule::find($id);
@@ -111,24 +112,20 @@ class DoctorScheduleController extends Controller
 
             DB::commit();
             return redirect()->route('DoctorSchedule.index')->with(['success' => 'تم التعديل بنجاح']);
-       } catch (\Exception $ex) {
-           DB::rollback();
-           return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-       }
+      //  } catch (\Exception $ex) {
+      //      DB::rollback();
+       //     return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+      //  }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
-        $DoctorSchedule = DoctorSchedule::find($id);
-
-        $DoctorSchedule->delete();
-        return redirect()->route('DoctorSchedule.index')->with(['success' => 'تم الحذف بنجاح']);
+        $Appointment = Appointment::find($id);
+        $Appointment->doctor->bookAvailable =1;
+        $Appointment->doctor->save();
+        $Appointment->delete();
+        return redirect()->route('reservation.index')->with(['success' => 'تم الحذف بنجاح']);
     }
 
 

@@ -50,10 +50,9 @@
 	<nav class="navbar navbar-expand-lg navigation" id="navbar">
 		<div class="container">
 		 	 <a class="navbar-brand" href="{{route('home')}}">
-			  	<img src="{{asset('/front/')}}/images/logo.jpeg" alt="" style="    background-size: cover;
-                  width: 100px;" class="img-fluid">
+			  	<img src="{{asset('/front/')}}/images/logo.jpng" alt="" style="    background-size: cover;    width: 150px;" class="img-fluid">
 			  </a>
-
+{{-- {{asset('/front/')}}/images/logo.png --}}
 		  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="icofont-navigation-menu"></span>
 		  </button>

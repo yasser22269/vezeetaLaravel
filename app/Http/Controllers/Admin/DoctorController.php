@@ -37,7 +37,7 @@ class DoctorController extends Controller
 
     public function store(DoctorRequest $request)
     {
-       // try {
+       try {
 
             DB::beginTransaction();
 
@@ -63,10 +63,10 @@ class DoctorController extends Controller
             // return $Doctor;
             DB::commit();
             return redirect()->route('Doctors.edit', $doctor->id)->with(['success' => ' تم ألاضافة بنجاح يجب اضافه باقى الخصائص']);
-     //   } catch (\Exception $ex) {
-     //       DB::rollback();
-      //      return redirect()->route('Doctors.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-      //  }
+       } catch (\Exception $ex) {
+           DB::rollback();
+           return redirect()->route('Doctors.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+       }
     }
 
 

@@ -56,9 +56,11 @@ Route::group([
 
    Route::get('Doctor/{slug}', 'DoctorController@show')->name('site.doctor.show');
    Route::get('appoinment', 'DoctorController@appoinment')->name('appoinment');
+   Route::get('appoinment/show/{id}', 'DoctorController@appoinmentshow')->name('appoinmentshow');
+   Route::post('appoinment/show/{id}', 'DoctorController@appoinmentupdate')->name('appoinmentupdate');
 
    // ------------------------------End DoctorController--------------------
-
+   
 
         // ------------------------------Start CommentController-----------------------
 

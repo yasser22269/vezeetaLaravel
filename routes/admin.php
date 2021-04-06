@@ -35,10 +35,6 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
          // ------------------------------Start Settings-----------------------------------
 
-        //  Route::resource('Settings', 'SettingController');
-        //  Route::get('shipping-methods/{type}', 'SettingController@editShippingMethods')->name('edit.shippings.methods');
-        //  Route::put('shipping-methods/{id}', 'SettingController@updateShippingMethods')->name('update.shippings.methods');
-
          // ------------------------------End Settings--------------------------------------
 
 
@@ -116,7 +112,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
             Route::resource('Slider', 'SliderImagesController');
 
             // ------------------------------End Slider-------------------------------------
+            // ------------------------------Start Slider------------------------------------
 
+            Route::resource('reservation', 'ReservationController');
+
+            // ------------------------------End Slider-------------------------------------
 
 
     });

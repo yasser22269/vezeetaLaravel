@@ -4,8 +4,11 @@
 		<div class="row">
 			<div class="col-lg-4 mr-auto col-sm-6">
 				<div class="widget mb-5 mb-lg-0">
-					<div class="logo mb-4">
+					{{-- <div class="logo mb-4">
 						<img src="{{asset('/front/')}}/images/logo.png" alt="" class="img-fluid">
+					</div> --}}
+                    <div class="logo mb-4">
+						<img src="{{asset('/front/')}}/images/logo.jpeg" style="    background-size: cover;    width: 150px;" alt="" class="img-fluid">
 					</div>
 					<p>{{$setting->about_me}}</p>
 

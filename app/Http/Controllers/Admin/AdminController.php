@@ -27,10 +27,9 @@ class AdminController extends Controller
 
        // return  $DoctorSchedules ;
         foreach ($DoctorSchedules as $DoctorSchedule) {
-            if($DoctorSchedule->patient ==null)
-                continue;
+            
             $events[] = [
-                'title' => $DoctorSchedule->patient->first()->name . " " .date('g:i a', strtotime($DoctorSchedule->startTime))  . "To" .  date('g:i a', strtotime($DoctorSchedule->endTime))  ,
+                'title' => $DoctorSchedule->name . " " .date('g:i a', strtotime($DoctorSchedule->startTime))  . "To" .  date('g:i a', strtotime($DoctorSchedule->endTime))  ,
                 'start' => $DoctorSchedule->scheduleDate,
                 'url'   => route('DoctorSchedule.edit', $DoctorSchedule->id),
             ];

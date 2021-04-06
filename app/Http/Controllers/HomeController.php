@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Feedback;
 use App\Models\Product;
 use App\Models\SliderImages;
 use Illuminate\Http\Request;
@@ -39,9 +40,12 @@ class HomeController extends Controller
         $categories = Category::select('name','id')->get();
         //End FEATURED ITEMS;
 
-      //   return $SliderImage;
 
-        return view('home', compact('SliderImage', 'categories'));
+        $feedbacks =Feedback::inRandomOrder()->limit(6)->get();
+
+      //   return $feedbacks;
+
+        return view('home', compact('SliderImage', 'categories',"feedbacks"));
     }
 
 

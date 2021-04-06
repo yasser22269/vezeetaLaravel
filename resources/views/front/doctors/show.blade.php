@@ -35,7 +35,7 @@
 
             <div class="dates" style="overflow-y: scroll;width: 100%;height: 147px;">
             @foreach ($DoctorScheduleDAy as $Day)
-            <a href="#">{{ date('h:i a', strtotime($Day->startTime))  }}</a>
+            <a href="{{route('appoinmentshow',$Day->id)}}">{{ date('h:i a', strtotime($Day->startTime))  }}</a>
             @endforeach
           </div>
              @else
@@ -48,7 +48,7 @@
             @if ($DoctorScheduleTomorrow->count() > 0)
             <div class="dates" style="overflow-y: scroll;width: 100%;height: 147px;">
             @foreach ($DoctorScheduleTomorrow as $Tomorrow)
-            <a href="#">{{ date('h:i a', strtotime($Tomorrow->startTime))  }}</a>
+            <a href="{{route('appoinmentshow',$Tomorrow->id)}}">{{ date('h:i a', strtotime($Tomorrow->startTime))  }}</a>
             @endforeach
              </div>
         @else

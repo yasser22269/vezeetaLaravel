@@ -26,11 +26,10 @@ class ApprointmentRequest  extends FormRequest
         return [
             'email' => 'required|email',
             'name' => 'required',
-            'phone' => 'required|max:11|min:11',
-            'doctor_id' => 'required|exists:doctors,id',
+            'phone' => 'required',
+            'doctor_id' => 'required|exists:doctor_schedules,id',
 
         ];
     }
-
 
 }
