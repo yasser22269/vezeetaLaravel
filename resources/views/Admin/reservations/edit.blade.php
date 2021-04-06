@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','DoctorSchedule Edit')
+@section('title','reservation Edit')
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('/')}}app-assets/vendors/css/forms/selects/select2.min.css">
 @endsection
@@ -7,15 +7,15 @@
 @section('content')
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-2">
-      <h3 class="content-header-title">DoctorSchedule</h3>
+      <h3 class="content-header-title">reservation</h3>
       <div class="row breadcrumbs-top">
         <div class="breadcrumb-wrapper col-12">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('Admin') }}">Admin</a>
             </li>
-             <li class="breadcrumb-item"><a href="{{ route('DoctorSchedule.index') }}">DoctorSchedule</a>
+             <li class="breadcrumb-item"><a href="{{ route('reservation.index') }}">reservation</a>
             </li>
-            <li class="breadcrumb-item active">DoctorSchedule Edit
+            <li class="breadcrumb-item active">reservation Edit
             </li>
           </ol>
         </div>
@@ -26,18 +26,21 @@
 
       <div class="card">
           <div class="container">
-            <form class="form" method="POST" action="{{ route('DoctorSchedule.update',$DoctorSchedule->id) }}">
+            <form class="form" method="POST" action="{{ route('reservation.update',$reservation->id) }}">
                 @csrf
                 @method('put')
+
+                <input type="hidden" name="bookAvailable"value='0'>
+
                 <div class="form-body">
-                  <h4 class="form-section">DoctorSchedule Info</h4>
-                  <input type="hidden"  name="id" value="{{ $DoctorSchedule->id }}">
+                  <h4 class="form-section">reservation Info</h4>
+                  <input type="hidden"  name="id" value="{{ $reservation->id }}">
 
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="projectinput1">schedule Date</label>
-                        <input type="date" id="projectinput1" class="form-control" placeholder="scheduleDate" name="scheduleDate" value="{{ $DoctorSchedule->scheduleDate }}">
+                        <input type="date" id="projectinput1" class="form-control" placeholder="scheduleDate" name="scheduleDate" value="{{ $reservation->doctor->scheduleDate }}">
                         @error('scheduleDate')
                         <span class="text-danger"> {{$message}}</span>
                         @enderror
@@ -52,7 +55,7 @@
                                   @if($Doctors && $Doctors -> count() > 0)
                                       @foreach($Doctors as $Doctor)
                                           <option
-                                          {{ $Doctor->id == $DoctorSchedule->doctor_id ? 'selected':'' }}
+                                          {{ $Doctor->id == $reservation->doctor->doctor_id ? 'selected':'' }}
                                               value="{{$Doctor->id }}">{{$Doctor->name}}</option>
                                       @endforeach
                                   @endif
@@ -68,7 +71,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                           <label for="projectinput1">start Time Date</label>
-                          <input type="time" id="projectinput1" class="form-control" placeholder="startTime" name="startTime" value="{{ $DoctorSchedule->startTime }}">
+                          <input type="time" id="projectinput1" class="form-control" placeholder="startTime" name="startTime" value="{{ $reservation->doctor->startTime }}">
                           @error('startTime')
                           <span class="text-danger"> {{$message}}</span>
                           @enderror
@@ -77,31 +80,33 @@
                       <div class="col-md-6">
                         <div class="form-group">
                           <label for="projectinput1">End Time Date</label>
-                          <input type="time" id="projectinput1" class="form-control" placeholder="EndTime" name="endTime" value="{{ $DoctorSchedule->endTime }}">
+                          <input type="time" id="projectinput1" class="form-control" placeholder="EndTime" name="endTime" value="{{ $reservation->doctor->endTime }}">
                           @error('endTime')
                           <span class="text-danger"> {{$message}}</span>
                           @enderror
                         </div>
                       </div>
                 </div>
-                  <div class="row">
-                    <div class="col-md-12">
-                        <div class="hidden" style="display: none">
-                            <label for="switcheryColor4"
-                                   class="card-title ">Status </label>
-                            <input type="checkbox" value="1"
-                                   name="bookAvailable"
-                                    {{ $DoctorSchedule->bookAvailable == 1 ? 'checked': ""}}
-                                   id="switcheryColor4"
-                                   class="switchery" data-color="success"
-                                   />
-                            @error("bookAvailable")
-                            <span class="text-danger">{{$message }}</span>
-                            @enderror
-                         </div>
+                <div class="row">
 
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="projectinput2">patient Name</label>
+                          <input type="text" id="projectinput1" class="form-control" placeholder="name" name="name" value="{{ $reservation->name }}">
+                          @error('name')
+                          <span class="text-danger"> {{$message}}</span>
+                          @enderror
                         </div>
-
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="projectinput2">patient phone</label>
+                          <input type="text" id="projectinput1" class="form-control" placeholder="phone" name="phone" value="{{ $reservation->phone }}">
+                          @error('phone')
+                          <span class="text-danger"> {{$message}}</span>
+                          @enderror
+                        </div>
+                      </div>
 
                   </div>
 
@@ -114,7 +119,7 @@
 
           </div>
          </div>
-         <h2> {{ $DoctorSchedule->bookAvailable == 1 ? 'ليس محجوزا': "(محجوز)"}}</h2>
+         <h2> {{ $reservation->doctor->bookAvailable == 1 ? 'ليس محجوزا': "(محجوز)"}}</h2>
 
          @endsection
 

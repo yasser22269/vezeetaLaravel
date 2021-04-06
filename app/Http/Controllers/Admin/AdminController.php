@@ -6,11 +6,15 @@ use Illuminate\Http\Request;
 use  App\Http\Controllers\Controller;
 use App\Http\Requests\AdminProfileRequest;
 use App\Models\Admin;
+use App\Models\Appointment;
+use App\Models\Category;
 use App\Models\ContactUS;
+use App\Models\Doctor;
 use App\Models\Order;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\DoctorSchedule;
+use App\Models\Tag;
 use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
@@ -18,26 +22,26 @@ class AdminController extends Controller
 
     public function index()
     {
-        $produtctCount = Product::count();
-        $OrderCount = Order::count();
-        $UserCount = User::count();
+        $reservationcount = Appointment::count();
+        $CategoryCount = Category::count();
         $ContactUSCount = ContactUS::count();
+        $DoctorCount = Doctor::count();
 
         $DoctorSchedules = DoctorSchedule::BookAvailable()->Join('appointments', 'appointments.doctor_id', '=', 'doctor_schedules.id')->select('*')->get();
 
-       // return  $DoctorSchedules ;
+        //return  $DoctorSchedules ;
         foreach ($DoctorSchedules as $DoctorSchedule) {
-            
+
             $events[] = [
                 'title' => $DoctorSchedule->name . " " .date('g:i a', strtotime($DoctorSchedule->startTime))  . "To" .  date('g:i a', strtotime($DoctorSchedule->endTime))  ,
                 'start' => $DoctorSchedule->scheduleDate,
-                'url'   => route('DoctorSchedule.edit', $DoctorSchedule->id),
+                'url'   => route('reservation.edit', $DoctorSchedule->id),
             ];
         }
 
 
 
-        return view('Admin.index', compact('produtctCount', 'OrderCount', 'UserCount', 'ContactUSCount','events'));
+        return view('Admin.index', compact('reservationcount', 'CategoryCount', 'DoctorCount', 'ContactUSCount','events'));
     }
 
 

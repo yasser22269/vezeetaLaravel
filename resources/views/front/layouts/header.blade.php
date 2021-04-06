@@ -50,7 +50,7 @@
 	<nav class="navbar navbar-expand-lg navigation" id="navbar">
 		<div class="container">
 		 	 <a class="navbar-brand" href="{{route('home')}}">
-			  	<img src="{{asset('/front/')}}/images/logo.jpng" alt="" style="    background-size: cover;    width: 150px;" class="img-fluid">
+			  	<img src="{{asset('/front/')}}/images/logo.png" alt="" style="    background-size: cover;    width: 150px;" class="img-fluid">
 			  </a>
 {{-- {{asset('/front/')}}/images/logo.png --}}
 		  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,23 +59,8 @@
 
 		  <div class="collapse navbar-collapse" id="navbarmain">
 			<ul class="navbar-nav ml-auto">
-			    {{-- <li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="department.html" id="dropdown02" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Department <i class="icofont-thin-down"></i></a>
-					<ul class="dropdown-menu" aria-labelledby="dropdown02">
-						<li><a class="dropdown-item" href="department.html">Departments</a></li>
-						<li><a class="dropdown-item" href="department-single.html">Department Single</a></li>
-					</ul>
-			  	</li>
 
-			  	<li class="nav-item dropdown">
-					<a class="nav-link dropdown-toggle" href="doctor.html" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Doctors <i class="icofont-thin-down"></i></a>
-					<ul class="dropdown-menu" aria-labelledby="dropdown03">
-						<li><a class="dropdown-item" href="doctor.html">Doctors</a></li>
-						<li><a class="dropdown-item" href="doctor-single.html">Doctor Single</a></li>
-						<li><a class="dropdown-item" href="appoinment.html">Appoinment</a></li>
-					</ul>
-			  	</li> --}}
-                  @guest
+                  {{-- @guest
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('login') }}">تسجيل الدخول</a>
                     </li>
@@ -102,7 +87,7 @@
                             </form>
                         </div>
                     </li>
-                @endguest
+                @endguest --}}
 
                   <li class="nav-item"><a class="nav-link" href="{{route('Contacts')}}">تواصل معنا</a></li>
                   <li class="nav-item"><a class="nav-link" href="{{ route('categoriesHome') }}">الاقسام</a></li>

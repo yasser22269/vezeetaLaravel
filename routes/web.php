@@ -21,7 +21,7 @@ Route::group([
 ], function () {
 
 
-        Auth::routes();
+        // Auth::routes();
 
         // Route::get('/', 'Site\HomeController@index');
         // Route::get('/home', 'HomeController@index')->name('home');
@@ -60,7 +60,7 @@ Route::group([
    Route::post('appoinment/show/{id}', 'DoctorController@appoinmentupdate')->name('appoinmentupdate');
 
    // ------------------------------End DoctorController--------------------
-   
+
 
         // ------------------------------Start CommentController-----------------------
 

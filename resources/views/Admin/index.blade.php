@@ -17,8 +17,8 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="info">{{  $produtctCount }}</h3>
-                  <h6>Products Count</h6>
+                  <h3 class="info">{{  $reservationcount }}</h3>
+                  <h6>reservation Count</h6>
                 </div>
                 <div>
                   <i class="icon-basket-loaded info font-large-2 float-right"></i>
@@ -26,7 +26,7 @@
               </div>
               <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                 <div class="progress-bar bg-gradient-x-info" role="progressbar" style="width: 80%"
-                aria-valuenow="{{  $produtctCount }}" aria-valuemin="0" aria-valuemax="100"></div>
+                aria-valuenow="{{  $reservationcount }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </div>
@@ -38,8 +38,8 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="warning">{{  $OrderCount }}</h3>
-                  <h6>Order Count</h6>
+                  <h3 class="warning">{{  $CategoryCount }}</h3>
+                  <h6>Category Count</h6>
                 </div>
                 <div>
                   <i class="icon-pie-chart warning font-large-2 float-right"></i>
@@ -47,7 +47,7 @@
               </div>
               <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                 <div class="progress-bar bg-gradient-x-warning" role="progressbar" style="width: 65%"
-                aria-valuenow="{{   $OrderCount }}" aria-valuemin="0" aria-valuemax="100"></div>
+                aria-valuenow="{{   $CategoryCount }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </div>
@@ -59,8 +59,8 @@
             <div class="card-body">
               <div class="media d-flex">
                 <div class="media-body text-left">
-                  <h3 class="success">{{ $UserCount }}</h3>
-                  <h6>Customers</h6>
+                  <h3 class="success">{{ $DoctorCount }}</h3>
+                  <h6>Doctors</h6>
                 </div>
                 <div>
                   <i class="icon-user-follow success font-large-2 float-right"></i>
@@ -68,7 +68,7 @@
               </div>
               <div class="progress progress-sm mt-1 mb-0 box-shadow-2">
                 <div class="progress-bar bg-gradient-x-success" role="progressbar" style="width: 75%"
-                aria-valuenow="{{ $UserCount }}" aria-valuemin="0" aria-valuemax="100"></div>
+                aria-valuenow="{{ $DoctorCount }}" aria-valuemin="0" aria-valuemax="100"></div>
               </div>
             </div>
           </div>
@@ -98,7 +98,7 @@
     </div>
     <!--/ eCommerce statistic -->
     <!-- Products sell and New Orders -->
- 
+
 
 
 
@@ -114,14 +114,14 @@
 <script>
     $(document).ready(function () {
             // page is now ready, initialize the calendar...
-            
+
             events={!! json_encode($events) !!};
             $('#calendar').fullCalendar({
                 // put your options and callbacks here
                 events: events,
             })
 
-           
+
         });
 </script>
 @endsection

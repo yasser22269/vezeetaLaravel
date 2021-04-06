@@ -1,5 +1,5 @@
 @extends('layouts.admin')
-@section('title','DoctorSchedule Create')
+@section('title','reservation Create')
 
 @section('style')
 <link rel="stylesheet" type="text/css" href="{{asset('/')}}app-assets/vendors/css/forms/selects/select2.min.css">
@@ -8,15 +8,15 @@
 @section('content')
 <div class="content-header row">
     <div class="content-header-left col-md-6 col-12 mb-2">
-      <h3 class="content-header-title">DoctorSchedule</h3>
+      <h3 class="content-header-title">reservation</h3>
       <div class="row breadcrumbs-top">
         <div class="breadcrumb-wrapper col-12">
           <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('Admin') }}">Admin</a>
             </li>
-             <li class="breadcrumb-item"><a href="{{ route('DoctorSchedule.index') }}">DoctorSchedule</a>
+             <li class="breadcrumb-item"><a href="{{ route('reservation.index') }}">reservation</a>
             </li>
-            <li class="breadcrumb-item active">DoctorSchedule Create
+            <li class="breadcrumb-item active">reservation Create
             </li>
           </ol>
         </div>
@@ -27,12 +27,12 @@
 
       <div class="card">
           <div class="container">
-            <form class="form" method="POST" action="{{ route('DoctorSchedule.store') }}">
+            <form class="form" method="POST" action="{{ route('reservation.store') }}">
                 @csrf
                 <div class="form-body">
-                  <h4 class="form-section">DoctorSchedule Info</h4>
+                  <h4 class="form-section">reservation Info</h4>
 
-
+                    <input type="hidden" name="bookAvailable"value='0'>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
@@ -46,8 +46,8 @@
                     <div class="col-md-6">
                       <div class="form-group">
                         <label for="projectinput2">doctor Name</label>
-                        <select name="Doctors[]" class="select2 form-control" multiple>
-                            <optgroup label="من فضلك أختر الدكتور او اكثر من واحد ">
+                        <select name="doctor_id" class="form-control" >
+                            <optgroup label="من فضلك أختر الدكتور">
 
                                 @if($Doctors && $Doctors -> count() > 0)
                                     @foreach($Doctors as $Doctor)
@@ -57,7 +57,7 @@
                                 @endif
                             </optgroup>
                         </select>
-                        @error('Doctors.0')
+                        @error('doctor_id')
                         <span class="text-danger"> {{$message}}</span>
                         @enderror
                       </div>
@@ -86,21 +86,24 @@
                 </div>
                   <div class="row">
 
-                    <div class="col-md-12">
-                            <label for="switcheryColor4"
-                                   class="card-title ">booking Available(متاح للحجز) </label>
-                            <input type="checkbox" value="1"
-                                   name="bookAvailable"
-                                   id="switcheryColor4"
-                                   class="switchery" data-color="success"
-                                   checked/>
-
-                            @error("bookAvailable")
-                            <span class="text-danger">{{$message }}</span>
-                            @enderror
+                    <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="projectinput2">patient Name</label>
+                          <input type="text" id="projectinput1" class="form-control" placeholder="name" name="name">
+                          @error('name')
+                          <span class="text-danger"> {{$message}}</span>
+                          @enderror
                         </div>
-
-
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="projectinput2">patient phone</label>
+                          <input type="text" id="projectinput1" class="form-control" placeholder="phone" name="phone">
+                          @error('phone')
+                          <span class="text-danger"> {{$message}}</span>
+                          @enderror
+                        </div>
+                      </div>
 
                   </div>
 

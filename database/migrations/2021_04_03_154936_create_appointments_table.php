@@ -18,7 +18,7 @@ class CreateAppointmentsTable extends Migration
             // $table->integer('user_id')->unsigned();
             $table->integer('doctor_id')->unsigned();
             $table->string('name');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone');
 
             $table->foreign('doctor_id')->references('id')->on('doctor_schedules')->onUpdate('cascade');

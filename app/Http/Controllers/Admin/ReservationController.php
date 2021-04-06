@@ -5,6 +5,7 @@ use App\Models\DoctorSchedule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DoctorScheduleRequest;
+use App\Http\Requests\ReservationRequest;
 use App\Http\Requests\UpdateDoctorScheduleRequest;
 use App\Models\Appointment;
 use App\Models\Doctor;
@@ -33,7 +34,7 @@ class ReservationController extends Controller
     {
         $Doctors = Doctor::get();
 
-        return view('Admin.doctorSchedules.create', compact( 'Doctors'));
+        return view('Admin.reservations.create', compact( 'Doctors'));
     }
 
     /**
@@ -42,36 +43,32 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(DoctorScheduleRequest $request)
+    public function store(ReservationRequest $request)
     {
-     //   try {
+
+       try {
         //    return $request;
             DB::beginTransaction();
-            if (isset($request->bookAvailable) && $request->bookAvailable == 1){
-                $request->request->add(['bookAvailable' => 1]);
-            }
-            else{
-                $request->request->add(['bookAvailable' => 0]);
 
-            }
-           // return $request;
-        foreach ($request->Doctors as  $Doctor) {
-            DoctorSchedule::create([
-                'doctor_id' => (int)$Doctor,
+           $DoctorSchedule= DoctorSchedule::create([
+                'doctor_id' => (int)$request->doctor_id,
                 'scheduleDate' => $request->scheduleDate,
                 'startTime' => $request->startTime,
                 'endTime' => $request->endTime,
-                 'bookAvailable' => $request->bookAvailable,
+                'bookAvailable' => $request->bookAvailable,
             ]);
 
-         }
-
+            Appointment::create([
+                'doctor_id' => (int)$DoctorSchedule->id,
+                'name' => $request->name,
+                'phone' => $request->phone,
+            ]);
             DB::commit();
-            return redirect()->route('DoctorSchedule.index')->with(['success' => 'تم ألاضافة بنجاح']);
-     //   } catch (\Exception $ex) {
-      //      DB::rollback();
-       //     return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-      //  }
+            return redirect()->route('reservation.index')->with(['success' => 'تم ألاضافة بنجاح']);
+       } catch (\Exception $ex) {
+           DB::rollback();
+           return redirect()->route('reservation.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+       }
     }
 
     /**
@@ -82,11 +79,11 @@ class ReservationController extends Controller
      */
     public function edit($id)
     {
-        $DoctorSchedule = DoctorSchedule::findOrFail($id);
+        $reservation = Appointment::findOrFail($id);
 
         $Doctors = Doctor::get();
 
-        return view('Admin.doctorSchedules.edit', compact('DoctorSchedule', "Doctors"));
+        return view('Admin.reservations.edit', compact('reservation', "Doctors"));
     }
 
     /**
@@ -96,29 +93,42 @@ class ReservationController extends Controller
      * @param  \App\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDoctorScheduleRequest $request, $id)
+    public function update(ReservationRequest $request, $id)
     {
-      //  try {
+       try {
+           //return $request;
 
             DB::beginTransaction();
-            $DoctorSchedule = DoctorSchedule::find($id);
-            if (isset($request->bookAvailable) && $request->bookAvailable == 1)
-                $request->request->add(['bookAvailable' => 1]);
-            else
-                $request->request->add(['bookAvailable' => 0]);
-                // return $request->all();
+            $appointment =Appointment::findOrfail($request->id);
 
-             $DoctorSchedule->update($request->all());
+            $DoctorSchedule =DoctorSchedule::findOrfail($appointment->doctor_id);
+           // return $DoctorSchedule;
+
+             $DoctorSchedule->update([
+                'doctor_id' => (int)$request->doctor_id,
+                'scheduleDate' => $request->scheduleDate,
+                'startTime' => $request->startTime,
+                'endTime' => $request->endTime,
+                'bookAvailable' => $request->bookAvailable,
+            ]);
+
+            $appointment->update([
+                'doctor_id' => (int)$DoctorSchedule->id,
+                'name' => $request->name,
+                'phone' => $request->phone,
+            ]);
+
 
             DB::commit();
-            return redirect()->route('DoctorSchedule.index')->with(['success' => 'تم التعديل بنجاح']);
-      //  } catch (\Exception $ex) {
-      //      DB::rollback();
-       //     return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
-      //  }
+            return redirect()->Back()->with(['success' => 'تم ألاضافة بنجاح']);
+
+       } catch (\Exception $ex) {
+           DB::rollback();
+           return redirect()->route('DoctorSchedule.index')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
+       }
     }
 
-    
+
     public function destroy($id)
     {
         $Appointment = Appointment::find($id);
