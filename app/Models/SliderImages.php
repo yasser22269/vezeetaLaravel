@@ -18,5 +18,5 @@ class SliderImages extends Model
     }
 
 
- 
+
 }

@@ -2,7 +2,7 @@
 
 use App\Models\Category;
 
-define('PAGINATION_COUNT', 10);
+define('PAGINATION_COUNT', 30);
 
 function getFolder()
 {

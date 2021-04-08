@@ -5,6 +5,8 @@
 
 
 <!-- Slider Start -->
+@isset($SliderImage)
+
 <section class="banner" style='background:url("{{$SliderImage->photo}}") no-repeat;background-size:cover'>
 	<div class="container">
 		<div class="row">
@@ -23,6 +25,8 @@
 		</div>
 	</div>
 </section>
+@endisset
+
 <section class="features">
 	<div class="container">
 		<div class="row">
@@ -277,6 +281,7 @@
             </div>
         </div>
 </section> --}}
+@isset($feedbacks)
 
 <section class="section testimonial-2 gray-bg">
 	<div class="container">
@@ -295,7 +300,7 @@
 		<div class="row align-items-center">
 			<div class="col-lg-12 testimonial-wrap-2">
 			@foreach ($feedbacks as $feedback)
-				
+
 				<div class="testimonial-block style-2  gray-bg">
 					<i class="icofont-quote-right"></i>
 
@@ -313,11 +318,13 @@
 				</div>
 			@endforeach
 
-				
+
 			</div>
 		</div>
 	</div>
 </section>
+@endisset
+
 {{-- <section class="section clients">
 	<div class="container">
 		<div class="row justify-content-center">

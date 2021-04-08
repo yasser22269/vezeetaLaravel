@@ -26,8 +26,16 @@ class ApprointmentRequest  extends FormRequest
         return [
             'email' => 'required|email',
             'name' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|numeric',
             'doctor_id' => 'required|exists:doctor_schedules,id',
+
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+             'phone.numeric' => ' يجب ادخال رقم ',
 
         ];
     }

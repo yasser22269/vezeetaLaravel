@@ -1,10 +1,15 @@
-login
-reset
-products
 
 
-Admin
-الحجوزات
+doctor img =>    border-radius: 10px;
 
-return $query->inRandomOrder()->take(4);
+category select
+
+scroll dates
+
+hr comments
+
+
+
+valide
+
 

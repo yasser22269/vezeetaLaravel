@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Site;
 use App\Models\Product;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\front\ApprointmentRequest;
+use App\Mail\Reservations;
 use App\Models\Appointment;
 use App\Models\Category;
 use App\Models\Doctor;
@@ -34,15 +35,20 @@ class DoctorController extends Controller
     {
         $doctor =Doctor::Active()->where('slug',$slug)->first();
 
-       $DoctorScheduleDAy =  DoctorSchedule::NotBookAvailable()->where('doctor_id', $doctor->id)->where('scheduleDate','=', Carbon::now()->format('Y-m-d'))->get();
-       $DoctorScheduleDAy = $DoctorScheduleDAy->sortBy('scheduleDate');
+       $DoctorScheduleDAy =  DoctorSchedule::NotBookAvailable()->where('doctor_id', $doctor->id)->where('scheduleDate','=', Carbon::now()->format('Y-m-d'))->orderBy('startTime')->get();
 
-       $DoctorScheduleTomorrow =  DoctorSchedule::NotBookAvailable()->where('doctor_id', $doctor->id)->where('scheduleDate','=', Carbon::now()->addDay()->format('Y-m-d'))->get();
-       $DoctorScheduleTomorrow = $DoctorScheduleTomorrow->sortBy('scheduleDate');
+
+
+
+       $DoctorScheduleTomorrow =  DoctorSchedule::NotBookAvailable()->where('doctor_id', $doctor->id)->where('scheduleDate','=', Carbon::now()->addDay()->format('Y-m-d'))->orderBy('startTime')->get();
+       //$DoctorScheduleTomorrow = $DoctorScheduleTomorrow->sortBy('scheduleDate');
 
 
         $doctor->viewed++;
         $doctor->save();
+
+      //  return $DoctorScheduleDAy;
+
      //   return Carbon::now()->format('Y-m-d');
        // return $DoctorScheduleDAy;
         return view('front.doctors.show',compact("doctor",'DoctorScheduleDAy','DoctorScheduleTomorrow'));
@@ -78,6 +84,7 @@ class DoctorController extends Controller
           $DoctorSchedule->save();
 
           Appointment::create($request->all());
+
 
           return redirect()->route('home')->with(['success' => 'تم الحجز بنجاح']);
 

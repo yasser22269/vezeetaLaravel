@@ -11,24 +11,15 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-        Setting::setMany([
-            'default_locale' => 'ar',
-            'default_timezone' => 'Africa/Cairo',
-            'reviews_enabled' => true,
-            'auto_approve_reviews' => true,
-            'supported_currencies' => ['USD','LE','SAR'],
-            'default_currency' => 'USD',
-            'store_email' => 'yasser.m2291@gmail.com',
-            'search_engine' => 'mysql',
-            'local_shipping_cost' => 0,
-            'outer_shipping_cost' => 0,
-            'free_shipping_cost' => 0,
-            'translatable' => [
-                'store_name' => 'متجر',
-                'free_shipping_label' => 'توصيل مجاني',
-                'local_label' => 'توصيل داخلي',
-                'outer_label' => 'توصيل خارجي',
-            ],
+        Setting::create([
+            'phone' => '٠١٠١٥١٥٥٧١٢',
+            'email' => 'yasser.m22291@gmail.com',
+            'facebook' => 'yasser.m22291@gmail.com',
+            'twitter' => 'yasser.m22291@gmail.com',
+            'insta' => 'yasser.m22291@gmail.com',
+            'address' => 'المنصورة شارع النخلة بجوار بنزينة الغاز اعلى سويت هوم',
+            'about_me' => 'مركز عيادات فاميلي كير التخصصية هي منصة نشأت على يد أخصائية التغذية العلاجية ( نوف مقرن المحبوب ) خريجة جامعة الملك سعود مع مرتبة الشرف الأولى , مصنفة من الهيئة السعودية للتخصصات الصحية.',
+
         ]);
     }
 }

@@ -21,8 +21,7 @@ class SliderImagesController extends Controller
     public function index()
     {
         $SliderImages = SliderImages::paginate(PAGINATION_COUNT);
-        // translatedIn(app() -> getLocale())->
-        // return Request::has('SliderImagess');
+      //   return $SliderImages ;
         return view('Admin.sliderimages.index', compact('SliderImages'));
     }
 

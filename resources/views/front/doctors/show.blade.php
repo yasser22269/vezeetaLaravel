@@ -42,6 +42,7 @@
              تم حجز جميع مواعيد
             @endif
         </div>
+        <hr>
 
         <div class="sidebar-widget tags mb-3">
             <h5 class="mb-4">غدا</h5>
@@ -70,43 +71,48 @@
 		    <span>Closed</span>
 		  </li>
 		</ul> --}}
+        <hr>
 
-	</div>
-	<div class="sidebar-widget latest-post mb-3">
-		<h5>تفاصيل اكثر</h5>
+        <div class="sidebar-widget latest-post mb-3">
+            <h5>تفاصيل اكثر</h5>
 
-        <div class="py-2">
-        	<span class="text-sm text-muted">(بالجنية المصرى) سعر الكشف</span>
-            <h6 class="my-2">  {{ round($doctor->price) }} </h6>
+            <div class="py-2">
+                <span class="text-sm text-muted">(بالجنية المصرى) سعر الكشف</span>
+                <h6 class="my-2">  {{ round($doctor->price) }} </h6>
+            </div>
+
+            <div class="py-2">
+                   <span class="text-sm text-muted">القسم</span>
+                <h6 class="my-2">{{  $doctor->category->name }}</h6>
+            </div>
         </div>
 
-        <div class="py-2">
-       		<span class="text-sm text-muted">القسم</span>
-            <h6 class="my-2">{{  $doctor->category->name }}</h6>
+        <hr>
+
+        <div class="sidebar-widget tags mb-3">
+            <h5 class="mb-4">تاجات</h5>
+            @foreach ($doctor->tags as $tag)
+
+            <a href="#">{{ $tag->name }}</a>
+            @endforeach
+
         </div>
-	</div>
+        <hr>
+        @if ($doctor->Images->count() >0)
 
+        <div class="sidebar-widget tags mb-3">
+            <h5 class="mb-4">صور للعياده</h5>
 
-	<div class="sidebar-widget tags mb-3">
-		<h5 class="mb-4">تاجات</h5>
-        @foreach ($doctor->tags as $tag)
+            @foreach ($doctor->Images as $Image)
+             <img class="Imagedoctor"src="{{ $Image->photo }}" alt="" class="img-fluid" style="    width: 150px;">
+            @endforeach
 
-		<a href="#">{{ $tag->name }}</a>
-        @endforeach
+        </div>
 
-	</div>
-    @if ($doctor->Images->count() >0)
+        @endif
 
-    <div class="sidebar-widget tags mb-3">
-		<h5 class="mb-4">صور للعياده</h5>
-
-        @foreach ($doctor->Images as $Image)
-         <img class="Imagedoctor"src="{{ $Image->photo }}" alt="" class="img-fluid" style="    width: 150px;">
-        @endforeach
 
 	</div>
-
-    @endif
 
 
 </div>
@@ -177,6 +183,8 @@
 					</div>
 
 				</li>
+        <hr>
+
                 @endforeach
 
 			</ul>

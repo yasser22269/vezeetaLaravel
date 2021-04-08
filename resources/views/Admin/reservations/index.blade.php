@@ -24,7 +24,7 @@
     <div class="content-header-right col-md-6 col-12">
       <div class="btn-group float-md-right" >
         <a href="{{ route('reservation.create') }}">
-            <button class="btn btn-info round  box-shadow-2 px-2"type="button" > Add reservation</button>
+            <button class="btn btn-info round  box-shadow-2 px-2"type="button" >  اضافه حجز</button>
         </a>
 
       </div>
