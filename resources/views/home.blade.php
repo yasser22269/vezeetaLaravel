@@ -18,7 +18,7 @@
 
 					{{-- <p class="mb-4 pr-5">احجز أونلاين أو كلم 01468486484</p> --}}
 					<div class="btn-container ">
-						<a href="{{ route('appoinment') }}" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">احجز أونلاين من هنا أو كلم 01468486484 <i class="icofont-simple-right ml-2  "></i></a>
+						<a href="{{ route('appoinment') }}" target="_blank" class="btn btn-main-2 btn-icon btn-round-full">احجز أونلاين من هنا أو كلم {{$setting->phone}} <i class="icofont-simple-right ml-2  "></i></a>
 					</div>
 				</div>
 			</div>

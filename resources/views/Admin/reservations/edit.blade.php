@@ -110,6 +110,19 @@
 
                   </div>
 
+                  <div class="row">
+
+                    <div class="col-md-12">
+                        <div class="form-group">
+                          <label for="projectinput2">price</label>
+                          <input type="text" class="form-control" disabled  value="{{ $reservation->doctor->doctors->price }}">
+
+                        </div>
+                      </div>
+                     
+
+                  </div>
+
                 <div class="form-actions">
                   <button type="submit" class="btn btn-primary">
                     <i class="la la-check-square-o"></i> Save

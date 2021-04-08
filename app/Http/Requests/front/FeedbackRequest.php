@@ -4,7 +4,7 @@ namespace App\Http\Requests\front;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApprointmentRequest  extends FormRequest
+class FeedbackRequest  extends FormRequest
 {
     /**CommentController
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class ApprointmentRequest  extends FormRequest
         return [
             'email' => 'required|email',
             'name' => 'required',
-            'phone' => 'required|max:11|min:11',
+            'comment' => 'required|',
             'doctor_id' => 'required|exists:doctors,id',
 
         ];
